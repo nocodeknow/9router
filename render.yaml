@@ -1,0 +1,47 @@
+# Snapshot-backed Render Free deployment. No paid disk/database is provisioned.
+services:
+  - type: web
+    name: ninerouter-nocodeknow
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    autoDeployTrigger: off
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: HOSTNAME
+        value: 0.0.0.0
+      - key: DATA_DIR
+        value: /app/data
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
+      - key: JWT_SECRET
+        generateValue: true
+      - key: API_KEY_SECRET
+        generateValue: true
+      - key: MACHINE_ID_SALT
+        generateValue: true
+      - key: INITIAL_PASSWORD
+        sync: false
+      - key: REQUIRE_API_KEY
+        value: "true"
+      - key: AUTH_COOKIE_SECURE
+        value: "true"
+      - key: ENABLE_REQUEST_LOGS
+        value: "false"
+      - key: OBSERVABILITY_ENABLED
+        value: "false"
+      - key: NINEROUTER_BACKUP_URL
+        value: https://huggingface.co/datasets/Experiment1213/freellmapi-state/resolve/main/9router.db.backup
+      - key: NINEROUTER_BACKUP_TOKEN
+        sync: false
+      - key: NINEROUTER_BACKUP_KEY
+        sync: false
+      - key: NINEROUTER_BACKUP_INTERVAL_MS
+        value: "300000"
+      # First deployment ONLY. Set 0 after the first verified upload.
+      - key: NINEROUTER_BACKUP_ALLOW_EMPTY
+        value: "1"

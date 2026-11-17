@@ -102,4 +102,5 @@ RUN apk add --no-cache su-exec ffmpeg && \
 EXPOSE 20128
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["node", "custom-server.js"]
+COPY --chown=node:node deploy/render /app/deploy/render
+CMD ["node", "deploy/render/run.mjs"]

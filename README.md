@@ -1,3 +1,5 @@
+> **This fork:** [Render Free with encrypted Hugging Face backup and startup restore](deploy/render/README.md). Snapshot recovery can lose changes since the last successful upload.
+
 <div align="center">
   <img src="./images/9router.png?1" alt="9Router Dashboard" width="800"/>
   
